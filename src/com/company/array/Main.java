@@ -69,7 +69,7 @@ public class Main {
             return;
         }
         int loopTill = (n / 2) - 1;
-        for (int i = 2; i < loopTill; i++) {
+        for (int i = 2; i <= loopTill; i++) {
             if (n % i == 0) {
                 System.out.println(n + " is not a prime number.");
                 return;
