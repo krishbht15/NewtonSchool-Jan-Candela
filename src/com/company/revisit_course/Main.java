@@ -1,5 +1,6 @@
 package com.company.revisit_course;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -14,7 +15,9 @@ public class Main {
 //        int a = 1;
 //        System.out.println(a++);
 //        System.out.println(++a);
-        playingAroundWithArrays();
+//        playingAroundWithArrays();
+//        System.out.println(isPrime(53));
+        playAroundWithAL();
     }
 
     public static void playingAroundWithLoops() {
@@ -109,4 +112,45 @@ public class Main {
     }
 
 //    https://leetcode.com/problems/rotate-array/
-}
+
+    public static boolean isPrime(int n) {
+        int x = (int) Math.sqrt(n);
+        for (int i = 2; i <= x; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void playAroundWithAL() {
+        ArrayList<Integer> list = new ArrayList<>();
+        System.out.println(list.size());
+        for (int i = 0; i < 10; i++) {
+            list.add(5);
+        }
+        System.out.println(list.size());
+        list.set(5, 15);
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));//list.get(i) is same as arr[i]
+        }
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        int[] arr = {2, 1, 3, 5, 12, 2, 4, 0};
+        for (int i = 0; i < arr.length; i++) {
+            list2.add(arr[i]);
+        }
+        System.out.println(list2);
+    }
+
+    public static ArrayList<Integer> primeRange(int M, int N) {
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = M; i <= N; i++) {
+            boolean isP = isPrime(i);
+            if (isP == true) {
+                res.add(i);
+            }
+        }
+        return res;
+    }
+ }
