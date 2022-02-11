@@ -17,7 +17,8 @@ public class Main {
 //        System.out.println(++a);
 //        playingAroundWithArrays();
 //        System.out.println(isPrime(53));
-        playAroundWithAL();
+//        playAroundWithAL();
+        playWithRecursion();
     }
 
     public static void playingAroundWithLoops() {
@@ -153,4 +154,32 @@ public class Main {
         }
         return res;
     }
- }
+
+    public static void playWithRecursion() {
+//        printPattern(5);
+        printPattern2(3);
+    }
+
+    public static void printPattern(int n) {
+        if (n == 0) return;
+        System.out.println(n);
+        printPattern(n - 1);
+        System.out.println(n);
+    }
+
+    public static void printPattern2(int n) {
+        if (n == 0) return;
+        System.out.println(n);
+        printPattern2(n - 1);
+        System.out.println(n);
+        printPattern2(n - 1);
+        System.out.println(n);
+    }
+
+    public static void toh(int n, char source, char helper, char dest) {
+        if (n == 0) return;
+        toh(n - 1, source, dest, helper);
+        System.out.println("move " + n + " from " + source + " to " + dest);
+        toh(n - 1, helper, source, dest);
+    }
+}
