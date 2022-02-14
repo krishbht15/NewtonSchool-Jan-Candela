@@ -6,10 +6,10 @@ public class Main {
 //        System.out.println("saving and calling it: " + ans);
 //        System.out.println("directly calling it: " + gcd(27, 18));
 //        System.out.println(powO(2, 10));
-        int[] arr = {1, 2, 5, 12, 52, 76, 34};
+        int[] arr = {1, 2, 5, 12, 52, 76};
 //        System.out.println(linearSearch(arr, 45));
 //        System.out.println(linearSearchRec(arr, 12, 0));
-        testRec(0);
+//        testRec(0);
     }
 
     public static int gcd(int a, int b) {
