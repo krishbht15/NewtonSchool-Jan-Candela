@@ -1,13 +1,16 @@
 package com.company.time_n_space;
 
+import com.sun.jmx.remote.internal.RMIExporter;
+
 import java.util.Arrays;
 
 public class Sorting {
 
     public static void main(String[] args) {
-        int[] arr = {45, 35, 25, 15, 55, 35, 75};
-        insertionSort(arr);
-        System.out.println(Arrays.toString(arr));
+        int[] arr = {45, 35, 25, 15, 55, 35, 31};
+        int[] res = mergeSort(arr, 0, arr.length - 1);
+        System.out.println(Arrays.toString(res));
+        System.out.println(partitionIndex(arr));
     }
 
     private static void swap(int[] arr, int i, int minIdx) {
@@ -90,5 +93,30 @@ public class Sorting {
             k++;
         }
         return ans;
+    }
+
+    public static int[] mergeSort(int[] arr, int l, int r) {
+        if (l == r) {
+            int[] res = new int[1];
+            res[0] = arr[l];
+            return res;
+        }
+        int mid = (l + r) / 2;
+        int[] lArr = mergeSort(arr, l, mid);
+        int[] rArr = mergeSort(arr, mid + 1, r);
+        return mergeTwoSortedArray(lArr, rArr);
+    }
+
+    public static int partitionIndex(int[] arr) {
+        int pivot = arr[arr.length - 1];
+        int i = 0, j = 0;
+        while (i < arr.length) {
+            if (arr[i] <= pivot) {
+                if (i != j) swap(arr, i, j);
+                j++;
+            }
+            i++;
+        }
+        return j - 1;
     }
 }
