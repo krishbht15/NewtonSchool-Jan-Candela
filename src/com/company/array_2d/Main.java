@@ -110,4 +110,74 @@ public class Main {
         }
         return false;
     }
+
+//    https://leetcode.com/problems/valid-sudoku/
+
+    public static boolean isValidElement(char[][] sudoku, int r, int c) {
+        char curr = sudoku[r][c];
+        for (int i = 0; i < sudoku.length; i++) {
+            if (sudoku[i][c] == curr && i != r) {
+                return false;
+            }
+        }
+        for (int j = 0; j < sudoku[0].length; j++) {
+            if (sudoku[r][j] == curr && j != c) {
+                return false;
+            }
+        }
+        int sr = r - (r % 3);
+        int sc = c - (c % 3);
+        for (int i = sr; i < sr + 3; i++) {
+            for (int j = sc; j < sc + 3; j++) {
+                if (sudoku[i][j] == curr && i != r && j != c) return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean validSudoku(char[][] sudoku, int n) {
+        if (n == 81) return true;
+        int r = n / 9;
+        int c = n % 9;
+        if (sudoku[r][c] != '.') {
+            if (!isValidElement(sudoku, r, c)) {
+                return false;
+            }
+        }
+        return validSudoku(sudoku, n + 1);
+    }
+
+    //    https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+    public List<String> letterCombinations(String digits) {
+        ArrayList<String> keymap = new ArrayList<>();
+        if (digits.length() == 0) return keymap;
+        keymap.add("");
+        keymap.add("abc");
+        keymap.add("def");
+        keymap.add("ghi");
+        keymap.add("jkl");
+        keymap.add("mno");
+        keymap.add("pqrs");
+        keymap.add("tuv");
+        keymap.add("wxyz");
+        return combination(digits, keymap, 0);
+    }
+
+    public static ArrayList<String> combination(String s, ArrayList<String> keypad, int i) {
+        if (i == s.length()) {
+            ArrayList<String> res = new ArrayList<>();
+            res.add("");
+            return res;
+        }
+        int pressedButton = s.charAt(i) - '0' - 1;
+        String pressedString = keypad.get(pressedButton);
+        ArrayList<String> res = new ArrayList<>();
+        for (int j = 0; j < pressedString.length(); j++) {
+            ArrayList<String> curr = combination(s, keypad, i + 1);
+            for (int k = 0; k < curr.size(); k++) {
+                res.add(pressedString.charAt(j) + curr.get(k));
+            }
+        }
+        return res;
+    }
 }
