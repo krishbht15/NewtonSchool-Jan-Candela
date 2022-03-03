@@ -1,11 +1,13 @@
 package com.company.oops;
 
-public class Mobile {
+public class Mobile implements Booting {
     final int RAM;
     int storage;
     String OS;
     int battery;
     String name;
+
+    static String mfgCountry = "India";
 
     public Mobile() {
         this.RAM = 2;
@@ -19,9 +21,19 @@ public class Mobile {
         this.name = name;
     }
 
-     void printDetails() {
+    void printDetails() {
         System.out.println("RAM = " + RAM);
         System.out.println("storage = " + storage);
         System.out.println("OS = " + OS);
+        System.out.println("mfgCountry = " + mfgCountry);
+    }
+
+    static void usageOfMobile() {
+        System.out.println("Mobile is used to connect with" +
+                " other people");
+    }
+
+    public void printBootingMessage() {
+        System.out.println("Mobile is booting.");
     }
 }
