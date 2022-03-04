@@ -15,6 +15,9 @@ public class Cycle extends Vehicle {
     public void start() {
         System.out.println("Paddling the paddles.");
         super.start();
+    }
 
+    public void stop() {
+        System.out.println("Cycle is stopping");
     }
 }

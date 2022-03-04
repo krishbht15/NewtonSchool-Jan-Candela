@@ -14,7 +14,9 @@ public class Car extends Vehicle {
     public void start() {
         System.out.println("Ignition of the engine");
         super.start();
-
     }
 
+    public void stop() {
+        System.out.println("Car is stopping");
+    }
 }
