@@ -68,6 +68,51 @@ public class LinkedList {
         return node;
     }
 
+    public Node getAt(int idx) {
+        if (idx < 0 || idx >= size) return null;
+        int i = 0;
+        Node node = this.head;
+        while (i < idx) {
+            i++;
+            node = node.next;
+        }
+        return node;
+    }
+
+    public void dataReverse() {
+        int i = 0;
+        while (i < size / 2) {
+            Node l = getAt(i);
+            Node r = getAt(size - 1 - i);
+            int temp = l.data;
+            l.data = r.data;
+            r.data = temp;
+            i++;
+        }
+    }
+
+    public void pointerRev() {
+        Node p = null;
+        Node c = this.head;
+        while (c != null) {
+            Node n = c.next;
+            c.next = p;
+            p = c;
+            c = n;
+        }
+        this.head = p;
+    }
+
+    public Node getMid() {
+        Node s = head;
+        Node f = head;
+        while (f != null && f.next != null) {
+            s = s.next;
+            f = f.next.next;
+        }
+        return s;
+    }
+
     public void display() {
         Node i = this.head;
         while (i != null) {

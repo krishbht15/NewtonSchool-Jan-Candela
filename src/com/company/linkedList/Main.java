@@ -16,21 +16,34 @@ public class Main {
         ll.add(40);
         ll.display();
         ll.add(50);
+        ll.pointerRev();
         ll.display();
-        ll.updateDataAt(0, 100);
-        ll.display();
-        ll.remove();
-        ll.display();
-        ll.remove();
-        ll.display();
-        ll.remove();
-        ll.display();
-        ll.remove();
-        ll.display();
-        ll.remove();
-        ll.display();
-        ll.remove();
-        ll.display();
+    }
 
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int aSize = getSize(headA);
+        int bSize = getSize(headB);
+        int initialSteps = Math.abs(aSize - bSize);
+        ListNode ai = headA;
+        ListNode bi = headB;
+        while (initialSteps > 0) {
+            if (aSize > bSize) ai = ai.next;
+            else bi = bi.next;
+            initialSteps--;
+        }
+        while (ai != bi) {
+            ai = ai.next;
+            bi = bi.next;
+        }
+        return ai;
+    }
+
+    public int getSize(ListNode node) {
+        int s = 0;
+        while (node != null) {
+            node = node.next;
+            s++;
+        }
+        return s;
     }
 }
