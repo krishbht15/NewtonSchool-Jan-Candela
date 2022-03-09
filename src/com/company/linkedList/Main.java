@@ -1,5 +1,7 @@
 package com.company.linkedList;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         playingAroundWithLL();
@@ -45,5 +47,63 @@ public class Main {
             s++;
         }
         return s;
+    }
+
+    public boolean hasCycle(ListNode head) {
+        ListNode s = head;
+        ListNode f = head;
+        while (f != null && f.next != null) {
+            s = s.next;
+            f = f.next.next;
+            if (s == f) return true;
+        }
+        return false;
+    }
+
+    public ListNode detectCycle(ListNode head) {
+        ListNode s = head;
+        ListNode f = head;
+        while (f != null && f.next != null) {
+            s = s.next;
+            f = f.next.next;
+            if (s == f) break;
+        }
+        if (f == null || f.next == null) return null;
+        s = head;
+        while (s != f) {
+            s = s.next;
+            f = f.next;
+        }
+        return s;
+    }
+
+    public ListNode copyLinkedList(ListNode head) {
+        if (head == null) return null;
+        ListNode old = head;
+        while (old != null) {
+            ListNode newNode = new ListNode(old.val);
+            ListNode next = old.next;
+            old.next = newNode;
+            newNode.next = next;
+            old = old.next.next;
+        }
+        old = head;
+        while (old != null) {
+            if (old.random != null) {
+                old.next.random = old.random.next;
+            }
+            old = old.next.next;
+        }
+        ListNode res = head.next;
+        old = head;
+        while (old != null) {
+            ListNode n = old.next;
+            old.next = old.next.next;
+            if (n.next != null) {
+                n.next = n.next.next;
+            }
+            old = old.next;
+        }
+        return res;
     }
 }
