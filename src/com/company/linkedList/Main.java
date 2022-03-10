@@ -4,7 +4,22 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        playingAroundWithLL();
+//        playingAroundWithLL();
+        playingAroundWithDLL();
+    }
+
+    public static void playingAroundWithDLL() {
+        DoublyLL doublyLL = new DoublyLL();
+        doublyLL.insertFirst(50);
+        doublyLL.display();
+        doublyLL.insertFirst(40);
+        doublyLL.display();
+        doublyLL.insertFirst(30);
+        doublyLL.display();
+        doublyLL.insertFirst(20);
+        doublyLL.display();
+        doublyLL.insertFirst(10);
+        doublyLL.display();
     }
 
     public static void playingAroundWithLL() {
@@ -106,4 +121,5 @@ public class Main {
         }
         return res;
     }
+
 }

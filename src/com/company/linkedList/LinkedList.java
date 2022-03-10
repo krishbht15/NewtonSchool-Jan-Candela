@@ -126,4 +126,31 @@ public class LinkedList {
         return this.size;
     }
 
+    public Node makeCircular() {
+        Node temp = head;
+        while (temp.next != null) temp = temp.next;
+        temp.next = head;
+        return head;
+    }
+
+    public int check(Node head) {
+        Node temp = head.next;
+        while (temp != null) {
+            if (temp == head) return 1;
+            temp = temp.next;
+        }
+        return 0;
+    }
+
+
+    public Node insertionCircularLL(Node head, int K) {
+        Node temp = head;
+        while (temp.next != head) {
+            temp = temp.next;
+        }
+        Node newNode = new Node(K);
+        temp.next = newNode;
+        newNode.next = head;
+        return head;
+    }
 }
