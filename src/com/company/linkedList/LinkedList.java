@@ -2,7 +2,7 @@ package com.company.linkedList;
 
 public class LinkedList {
 
-    class Node {
+     class Node {
         int data;
         Node next;
 

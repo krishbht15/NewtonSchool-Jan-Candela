@@ -7,8 +7,11 @@ import java.util.LinkedList;
 public class Main {
 
     public static void main(String[] args) {
-        Deque<Integer> deque = new LinkedList<>();
-deque.removeLast()
+//        Deque<Integer> deque = new LinkedList<>();
+//deque.removeLast()
+        int a = 10;
+        int x = 4;
+        System.out.println(a + x % x);
 //        playAroundQueue();
     }
 
