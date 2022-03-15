@@ -2,44 +2,54 @@ package com.company.hashing;
 
 import java.util.LinkedList;
 
-public class CustomHM {
+public class GenericHashMap<K, V> {
 
-    class HMNode {
-        String key;
-        Integer value;
+    class GenericNode {
+        K key;
+        V value;
 
-        public HMNode(String key, Integer value) {
+        public GenericNode(K key, V value) {
             this.key = key;
             this.value = value;
         }
     }
 
-    private LinkedList<HMNode>[] bucket;
+    private LinkedList<GenericNode>[] bucket;
     private int size;
 
-    public CustomHM() {
-        initialise(4);
+    public GenericHashMap() {
         this.size = 0;
+        initialise(4);
     }
 
-    public void put(String key, Integer val) {
+    public void put(K key, V val) {
         int bi = getBucketIndex(key);
-        for (HMNode node : bucket[bi]) {
+        for (GenericNode node : bucket[bi]) {
             if (node.key.equals(key)) {
                 node.value = val;
                 return;
             }
         }
-        HMNode node = new HMNode(key, val);
+        GenericNode node = new GenericNode(key, val);
         bucket[bi].addLast(node);
         this.size++;
         if (getLambda() <= 2.0) return;
         rehashing();
     }
 
-    public Integer get(String key) {
+    private void rehashing() {
+        LinkedList<GenericNode>[] old = this.bucket;
+        initialise(this.bucket.length * 2);
+        for (LinkedList<GenericNode> ll : old) {
+            for (GenericNode node : ll) {
+                put(node.key, node.value);
+            }
+        }
+    }
+
+    public V get(K key) {
         int bi = getBucketIndex(key);
-        for (HMNode node : this.bucket[bi]) {
+        for (GenericNode node : this.bucket[bi]) {
             if (node.key.equals(key)) {
                 return node.value;
             }
@@ -47,9 +57,9 @@ public class CustomHM {
         return null;
     }
 
-    public boolean containsKey(String key) {
+    public boolean containsKey(K key) {
         int bi = getBucketIndex(key);
-        for (HMNode node : this.bucket[bi]) {
+        for (GenericNode node : this.bucket[bi]) {
             if (node.key.equals(key)) {
                 return true;
             }
@@ -57,11 +67,11 @@ public class CustomHM {
         return false;
     }
 
-    public Integer remove(String key) {
+    public V remove(K key) {
         int bi = getBucketIndex(key);
-        for (HMNode node : this.bucket[bi]) {
+        for (GenericNode node : this.bucket[bi]) {
             if (node.key.equals(key)) {
-                Integer ans = node.value;
+                V ans = node.value;
                 bucket[bi].remove(node);
                 this.size--;
                 return ans;
@@ -74,19 +84,9 @@ public class CustomHM {
         return this.size;
     }
 
-    private void rehashing() {
-        LinkedList<HMNode>[] old = this.bucket;
-        initialise(this.bucket.length * 2);
-        for (LinkedList<HMNode> ll : old) {
-            for (HMNode node : ll) {
-                put(node.key, node.value);
-            }
-        }
-    }
-
     public void display() {
-        for (LinkedList<HMNode> ll : this.bucket) {
-            for (HMNode node : ll) {
+        for (LinkedList<GenericNode> ll : this.bucket) {
+            for (GenericNode node : ll) {
                 System.out.println(node.key + " = " + node.value);
             }
         }
@@ -96,14 +96,14 @@ public class CustomHM {
         return this.size * (1.0 / this.bucket.length);
     }
 
-    private int getBucketIndex(String key) {
+    private int getBucketIndex(K key) {
         return Math.abs(key.hashCode() % bucket.length);
     }
 
     private void initialise(int cap) {
         this.bucket = new LinkedList[cap];
         for (int i = 0; i < cap; i++) {
-            this.bucket[i] = new LinkedList<HMNode>();
+            this.bucket[i] = new LinkedList<>();
         }
     }
 }
