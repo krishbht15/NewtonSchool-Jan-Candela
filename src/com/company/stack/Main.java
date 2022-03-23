@@ -133,4 +133,54 @@ public class Main {
         }
         return max;
     }
+
+    public static int[] stockSpan(int[] arr) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(arr.length - 1);
+        int ci = arr.length - 2;
+        int[] res = new int[arr.length];
+        while (ci >= 0) {
+            while (!stack.isEmpty() && arr[stack.peek()] < arr[ci]) {
+                int temp = stack.pop();
+                res[temp] = temp - ci;
+            }
+            stack.push(ci);
+            ci--;
+        }
+        while (!stack.isEmpty()) {
+            int curr = stack.pop();
+            res[curr] = curr + 1;
+        }
+        return res;
+    }
+
+    class MinStack {
+
+        Stack<Integer> stack;
+        Stack<Integer> min;
+
+        public MinStack() {
+            this.stack = new Stack<>();
+            this.min = new Stack<>();
+        }
+
+        public void push(int val) {
+            if (min.isEmpty() || min.peek() > val) min.push(val);
+            stack.push(val);
+        }
+
+        public void pop() {
+            int val = stack.pop();
+            if (val == min.peek()) min.pop();
+        }
+
+        public int top() {
+            return stack.peek();
+        }
+
+        public int getMin() {
+            if (min.isEmpty()) return -1;
+            return min.peek();
+        }
+    }
 }
